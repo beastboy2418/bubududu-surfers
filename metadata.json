@@ -1,0 +1,6 @@
+{
+  "name": "Bubu & Dudu Subway Runner 3D",
+  "description": "A high-performance, butter-smooth 3D endless runner mobile web game featuring Bubu and Dudu, with procedural low-poly characters, Subway Surfers style chaser mechanics, and full touch/keyboard controls.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
