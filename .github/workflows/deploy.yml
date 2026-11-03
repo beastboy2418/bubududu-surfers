@@ -33,7 +33,11 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci || npm install
+        # GitHub's Linux runner may resolve optional native packages differently
+        # from the Windows machine that generated the lockfile. A normal install
+        # lets npm select the correct Linux binaries while keeping the build
+        # deterministic through package-lock.json.
+        run: npm install --no-audit --no-fund
 
       - name: Build production bundle
         run: npm run build
