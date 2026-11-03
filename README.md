@@ -6,14 +6,14 @@ This README documents the supplied source as reviewed on **3 November 2026**. Fe
 
 ## Run locally
 
-Use **Node.js 22.12 or newer** and npm. The included deployment workflow uses Node 22; the installed Vite package declares `^20.19.0 || >=22.12.0` support.
+Use **Node.js 22.12 or newer** and npm. The installed Vite package declares `^20.19.0 || >=22.12.0` support.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open `http://localhost:3000`. The development script binds to `0.0.0.0`, so it also permits LAN access where firewall rules allow it. If the lockfile is out of sync, resolve that mismatch before relying on reproducible installs; the deployment workflow currently falls back to `npm install`.
+Open `http://localhost:3000`. The development script binds to `0.0.0.0`, so it also permits LAN access where firewall rules allow it.
 
 **No Gemini API key is required by the current game.** The previous README's API-key setup instructions were template leftovers. No Gemini calls or backend routes are implemented in `src`; the Gemini capability in `metadata.json` and some dependencies remain from the starter project.
 
@@ -245,9 +245,9 @@ npm run preview
 
 Deploy the contents of `dist/` to static hosting. `base: './'` and base-aware asset paths support relative hosting; local hostnames receive root-relative model/audio paths. Validate assets at the actual deployment URL, especially under a subdirectory. `public/.nojekyll` is copied into the build for GitHub Pages.
 
-The included GitHub Actions workflow runs on pushes to `main` or `master`, or manual dispatch. It checks out the repository, installs Node 22 and dependencies, builds, uploads `dist/`, and deploys with the Pages actions. Configure the repository's Pages source as GitHub Actions and provide the normal Pages environment/permissions. There is no application server to deploy.
+The live repository is published through GitHub Pages' branch-based publisher. The compiled production entry point and hashed bundle are committed at the repository root so `https://beastboy2418.github.io/bubududu-surfers/` can serve the game directly. For source development, use `npm run dev`; after changes, run `npm run build` and publish the resulting `dist/` contents to the Pages source.
 
-The supplied folder has no Git repository metadata, so repository history, uncommitted changes, remote URLs, and live deployment status could not be verified. The existing AI Studio project identifier is `d5697be7-a76d-4b3f-a093-f96d36b8cfe5`; its hosted state was not inspected.
+The local source folder may be used without Git metadata; the GitHub repository is the deployment source. The existing AI Studio project identifier is `d5697be7-a76d-4b3f-a093-f96d36b8cfe5`; its hosted state was not inspected.
 
 ## Verification record
 
@@ -264,7 +264,7 @@ Checks performed on 3 November 2026 using the already-installed dependencies:
 | `npm run dev` | Vite reported ready on port 3000 |
 | Interactive browser test | PASS for startup/menu/tutorial DOM flow on `http://192.168.1.6:3000/`; gameplay performance and touch behavior still need device testing |
 | Test suite | `tests/gameplay.test.ts` with 20 deterministic tests |
-| Fresh dependency installation / deployment | Not performed |
+| Fresh dependency installation / deployment | Local clean install passed; GitHub Pages branch publication passed for the public URL |
 
 The verification environment reported Node **26.7.0** and npm **12.0.2**. Build/type-check success does not establish runtime collision accuracy, audio playback, mobile usability, or a particular frame rate.
 
